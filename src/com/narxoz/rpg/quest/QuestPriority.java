@@ -1,11 +1,22 @@
 package com.narxoz.rpg.quest;
 
-/**
- * Priority levels used by the guild master when planning quests.
- */
 public enum QuestPriority {
-    LOW,
-    NORMAL,
-    HIGH,
-    URGENT
+    LOW(1),
+    NORMAL(2),
+    HIGH(3),
+    URGENT(4);
+
+    private final int value;
+
+    QuestPriority(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public boolean isAtLeast(QuestPriority other) {
+        return this.value >= other.value;
+    }
 }
