@@ -1,21 +1,33 @@
 package com.narxoz.rpg.guild;
 
-/**
- * Guild officer responsible for wounds, potions, and recovery plans.
- */
 public class Healer extends GuildMember {
+    private int healingPrepared = 0;
 
     public Healer(String name, GuildMediator mediator) {
         super(name, mediator);
     }
 
     public void prepareAid(String topic, String payload) {
-        // TODO: send a healing message through the mediator.
         getMediator().dispatch(topic, this, payload);
+    }
+
+    public void prepareHealingPotions(int amount) {
+        healingPrepared += amount;
+        System.out.println("  🧪 " + getName() + " prepares " + amount + " healing potions!");
     }
 
     @Override
     public void receive(String topic, GuildMember from, String payload) {
-        // TODO: react to a guild-hall message without calling another colleague directly.
+        switch (topic) {
+            case "healing":
+                System.out.println("  💚 " + getName() + " receives healing request from " + from.getName());
+                prepareHealingPotions(30);
+                break;
+            case "aid":
+                System.out.println("  🩹 " + getName() + " prepares medical aid: " + payload);
+                break;
+            default:
+                System.out.println("  ℹ️ " + getName() + " noted message on [" + topic + "]: " + payload);
+        }
     }
 }
