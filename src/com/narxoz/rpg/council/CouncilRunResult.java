@@ -1,10 +1,6 @@
 package com.narxoz.rpg.council;
 
-/**
- * Summary of a guild war council planning run.
- */
 public class CouncilRunResult {
-
     private final int questsTraversed;
     private final int messagesRouted;
     private final int membersNotified;
@@ -15,24 +11,18 @@ public class CouncilRunResult {
         this.membersNotified = membersNotified;
     }
 
-    public int getQuestsTraversed() {
-        return questsTraversed;
-    }
-
-    public int getMessagesRouted() {
-        return messagesRouted;
-    }
-
-    public int getMembersNotified() {
-        return membersNotified;
-    }
+    public int getQuestsTraversed() { return questsTraversed; }
+    public int getMessagesRouted() { return messagesRouted; }
+    public int getMembersNotified() { return membersNotified; }
 
     @Override
     public String toString() {
-        return "CouncilRunResult{"
-                + "questsTraversed=" + questsTraversed
-                + ", messagesRouted=" + messagesRouted
-                + ", membersNotified=" + membersNotified
-                + '}';
+        return "╔════════════════════════════════════════╗\n" +
+               "║      COUNCIL RUN RESULTS               ║\n" +
+               "╠════════════════════════════════════════╣\n" +
+               "║ Quests Traversed:  " + String.format("%-14d", questsTraversed) + "║\n" +
+               "║ Messages Routed:   " + String.format("%-14d", messagesRouted) + "║\n" +
+               "║ Members Notified:  " + String.format("%-14d", membersNotified) + "║\n" +
+               "╚════════════════════════════════════════╝";
     }
 }
