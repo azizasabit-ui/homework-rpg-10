@@ -1,0 +1,45 @@
+MEDIATOR PATTERN UML DIAGRAM
+=============================
+
+                    +-------------------+
+                    |   GuildMediator   | (interface)
+                    +-------------------+
+                    | + register(member)|
+                    | + dispatch(topic, from, payload) |
+                    +-------------------+
+                           ▲
+                           |
+                    +-------------------+
+                    |    GuildHall      |
+                    +-------------------+
+                    | - membersByTopic: Map |
+                    +-------------------+
+                    | + register()      |
+                    | + dispatch()      |
+                    | + addSubscriber() |
+                    | + subscribersFor()|
+                    +-------------------+
+
+                    +-------------------+
+                    |   GuildMember     | (abstract)
+                    +-------------------+
+                    | - name: String    |
+                    | - mediator: GuildMediator |
+                    +-------------------+
+                    | + getName()       |
+                    | # getMediator()   |
+                    | + receive(topic, from, payload) (abstract) |
+                    +-------------------+
+                           ▲
+                           |
+         ┌─────────────────┼─────────────────┬─────────────────┐
+         │                 │                 │                 │
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+|  Quartermaster   | |     Scout        | |     Healer       | |    Captain       | |   Loremaster     |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+| - suppliesAlloc'd| | - lastReport     | | - healingPrep    | | - currentOrders  | | - loreCollected  |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+| + requestSupplies| | + reportRoute()  | | + prepareAid()   | | + issueOrder()   | | + shareLore()    |
+| + allocateSupplies| | + sendIntel()   | | + prepareHeal()  | | + giveOrders()   | | + recordHistory()|
+| + receive()      | | + receive()      | | + receive()      | | + receive()      | | + receive()      |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
