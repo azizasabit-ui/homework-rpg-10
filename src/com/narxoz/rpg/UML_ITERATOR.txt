@@ -1,0 +1,38 @@
+ITERATOR PATTERN UML DIAGRAM
+=============================
+
+                    +-------------------+
+                    |   QuestIterator   | (interface)
+                    +-------------------+
+                    | + hasNext(): bool |
+                    | + next(): Quest   |
+                    +-------------------+
+                           ▲
+                           |
+         ┌─────────────────┼─────────────────┬─────────────────┐
+         │                 │                 │                 │
++------------------+ +------------------+ +------------------+ +------------------+
+|OrderedQuestIterator| |ReverseQuestIterator| |PriorityQuestIterator| |RewardSortedQuestIterator|
++------------------+ +------------------+ +------------------+ +------------------+
+| - snapshot: List | | - snapshot: List | | - filtered: List | | - sorted: List   |
+| - cursor: int    | | - cursor: int    | | - cursor: int    | | - cursor: int    |
++------------------+ +------------------+ +------------------+ +------------------+
+| + hasNext()      | | + hasNext()      | | + hasNext()      | | + hasNext()      |
+| + next()         | | + next()         | | + next()         | | + next()         |
++------------------+ +------------------+ +------------------+ +------------------+
+
+AGGREGATE:
+---------
++------------------+
+|    QuestLog      |
++------------------+
+| - quests: List   |
++------------------+
+| + addQuest()     |
+| + snapshot()     | (returns copy, NOT internal list)
+| + ordered()      | (creates OrderedQuestIterator)
+| + reverse()      | (creates ReverseQuestIterator)
+| + priorityAtLeast() | (creates PriorityQuestIterator)
+| + rewardSorted() | (creates RewardSortedQuestIterator)
++------------------+
+
